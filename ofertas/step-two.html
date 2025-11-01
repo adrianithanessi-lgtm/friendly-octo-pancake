@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Avianca - Booking</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="shortcut icon" href="./assets/a.png" type="image/x-icon">
+    <link rel="shortcut icon" href="./assets/a.png" t  ype="image/x-icon">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -44,15 +44,17 @@
                         <img src="./assets/svg/arrow_top.png" alt="">
                     </div>
 
-                    <select id="select-passengers"></select>
+                    <select id="select-passengers">
+                    </select>
 
                     <h3>Pasajero - <span id="editing-label">Adulto 1</span></h3>
                     <p class="fs-4">Ingresa el nombre y primer apellido (de cada pasajero) tal y como aparecen en el pasaporte o documento de identidad. También, agrega el número de viajero frecuente LifeMiles o de una aerolínea aliada para disfrutar de más beneficios.</p>
                     
                     <input id="name" class="mt-5" type="text" placeholder="Nombre">
                     <span name="name-error" class="input-error-label">Por favor, ingresa tu primer nombre</span>
-                    <input id="surname" class="mt-4" type="text" placeholder="Apellido">
+                    <input id="surname" class="mt-4" type="text" placeholder="Apellido" >
                     <span name="surname-error" class="input-error-label">Por favor, ingresa tu primer apellido</span>
+
 
                     <div class="checkbox-group mt-4">
                         <input class="check" type="checkbox">
@@ -63,6 +65,7 @@
                         <label for="">Necesito asistencia especial (opcional)</label>
                     </div>
                     
+
                     <div class="mt-4 show justify-content-center">
                         <button id="btn-next-passenger" type="button" class="btn btn-gray">
                             Próximo Pasajero
@@ -70,6 +73,7 @@
                     </div>
                 </div>
                 
+
                 <hr>
 
                 <div class="form-section">
@@ -87,7 +91,7 @@
                     <span name="name-error" class="input-error-label">Por favor, ingresa tu número de teléfono</span>
 
                     <div class="checkbox-group mt-4">
-                        <input class="check" type="checkbox">
+                        <input class="check" type="checkbox" name="" id="">
                         <label for="">Acepto el uso de mis datos personales para recibir promociones, ofertas y novedades que Avianca tiene para mí.</label>
                     </div>
 
@@ -112,7 +116,8 @@
                     <h4 id="destination-code">CLI</h4>
                 </div>
             </div>
-            <h3>Total a pagar: <span id="total-price"></span></h3>
+            <h3>Total a pagar: <span id="total-price">$0.00</span></h3>
+
         </div>
 
         <p class="mt-2 mb-2">© Avianca S.A 2025</p>
@@ -122,45 +127,17 @@
     <script src="./js/step-two.js"></script>
     <script src="./js/step-twobot.js"></script>
     <script>
-      window.addEventListener('DOMContentLoaded', () => {
-        const fmt = new Intl.NumberFormat('es-CO', {
-          style: 'currency',
-          currency: 'COP',
-          minimumFractionDigits: 0
+        window.addEventListener('DOMContentLoaded', () => {
+            const price1 = parseFloat(localStorage.getItem('outboundFlightPrice')) || 0;
+            const price2 = parseFloat(localStorage.getItem('returnFlightPrice')) || 0;
+            const total = price1 + price2;
+        
+            const element = document.getElementById('total-price');
+            if (element) {
+                element.textContent = `$${total.toFixed(2)}`;
+            }
         });
-
-        const toInt = v => {
-          if (typeof v === 'number') return Math.round(v);
-          if (typeof v === 'string') return parseInt(v.replace(/[^\d]/g, ''), 10) || 0;
-          return 0;
-        };
-
-        let total = 0;
-
-        try {
-          const raw = sessionStorage.getItem('totalsCOP');
-          if (raw) {
-            const t = JSON.parse(raw);
-            const ida = toInt(t.ida || 0);
-            const vuelta = toInt(t.vuelta || 0);
-            const tasas = toInt(t.tasas || 0);
-            total = toInt(t.total || (ida + vuelta + tasas));
-          } else {
-          // fallback a los valores antiguos en localStorage
-            const p1 = toInt(localStorage.getItem('outboundFlightPrice') || 0);
-            const p2 = toInt(localStorage.getItem('returnFlightPrice') || 0);
-            total = p1 + p2;
-          }
-        } catch (e) {
-          const p1 = toInt(localStorage.getItem('outboundFlightPrice') || 0);
-          const p2 = toInt(localStorage.getItem('returnFlightPrice') || 0);
-          total = p1 + p2;
-        }
-
-        const el = document.getElementById('total-price');
-        if (el) el.textContent = fmt.format(total);
-      });
-    </script>
-
+        </script>
+                 
 </body>
 </html>
