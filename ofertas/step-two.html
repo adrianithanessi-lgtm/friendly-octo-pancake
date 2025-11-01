@@ -117,7 +117,7 @@
                 </div>
             </div>
             <div>
-                <h4 class="text-end mt-1">$<span id="flight-cost">49.900</span> COP</h4>
+                <h4 class="text-end mt-1">$<span id="flight-cost">65.600</span> COP</h4>
                 <p class="fs-5">Total de tu reserva:</p>
                 <img src="./assets/svg/info_icon.png" width="15px">
             </div>
@@ -129,60 +129,5 @@
     <!-- SCRIPTS -->
     <script src="./js/step-two.js"></script>
     <script src="./js/step-twobot.js"></script>
-</body>
-</html>                    <input id="email" class="mt-5" type="email" placeholder="Correo">
-                    <span name="name-error" class="input-error-label">Por favor, ingresa tu correo</span>
-                    <input id="number" class="mt-4" type="number" placeholder="Número de teléfono" oninput="limitDigits(this, 10)">
-                    <span name="name-error" class="input-error-label">Por favor, ingresa tu número de teléfono</span>
-
-                    <div class="checkbox-group mt-4">
-                        <input class="check" type="checkbox" name="" id="">
-                        <label for="">Acepto el uso de mis datos personales para recibir promociones, ofertas y novedades que Avianca tiene para mí.</label>
-                    </div>
-
-                    <div class="mt-4 show justify-content-center">
-                        <button type="submit" class="btn btn-gray">
-                            Continuar a pagar
-                        </button>
-                    </div>
-                </div>
-
-            </form>
-        </div>
-    </main>
-
-    <footer class="footer-fixed-2">
-        <div class="footer-flight-resume">
-            <div>
-                <p class="mb-1">Resumen del viaje:</p>
-                <div class="show align-items-center">
-                    <h4 id="origin-code">BOG</h4>
-                    <img src="./assets/svg/arrow.png" width="14px">
-                    <h4 id="destination-code">CLI</h4>
-                </div>
-            </div>
-            <h3>Total a pagar: <span id="total-price">$0.00</span></h3>
-
-        </div>
-
-        <p class="mt-2 mb-2">© Avianca S.A 2025</p>
-    </footer>
-
-    <!-- SCRIPTS -->
-    <script src="./js/step-two.js"></script>
-    <script src="./js/step-twobot.js"></script>
-    <script>
-        window.addEventListener('DOMContentLoaded', () => {
-            const price1 = parseFloat(localStorage.getItem('outboundFlightPrice')) || 0;
-            const price2 = parseFloat(localStorage.getItem('returnFlightPrice')) || 0;
-            const total = price1 + price2;
-        
-            const element = document.getElementById('total-price');
-            if (element) {
-                element.textContent = `$${total.toFixed(2)}`;
-            }
-        });
-        </script>
-                 
 </body>
 </html>
